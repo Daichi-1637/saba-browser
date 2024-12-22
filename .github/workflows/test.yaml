@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: cd saba
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
       - name: Install Rust toolchain
