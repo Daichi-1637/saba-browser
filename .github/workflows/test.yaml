@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: cd saba
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
       - name: Install Rust toolchain
@@ -21,7 +20,9 @@ jobs:
           rustup toolchain install stable
       - name: Run test compile
         run: |
+          cd saba
           cargo test --no-run --locked --workspace
       - name: Run unit test
         run: |
+          cd saba
           cargo test --workspace
