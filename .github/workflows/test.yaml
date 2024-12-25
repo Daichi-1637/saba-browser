@@ -7,6 +7,17 @@ on:
     paths:
       - '**.rs'
 
+env:
+  CONCURRENCY_GROUP: ${{ github.workflow }}-${{ github.ref }}
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: "${CONCURRENCY_GROUP}"
+  cancel-in-progress: true
+
 jobs:
   run-test:
     name: Run test on saba-core
@@ -15,9 +26,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
-      - name: Install Rust toolchain
-        run: |
-          rustup toolchain install stable
       - name: Run test compile
         run: |
           cd saba/saba_core
